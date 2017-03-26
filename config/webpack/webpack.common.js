@@ -120,9 +120,11 @@ module.exports = function () {
                 template: helpers.getAbsolutePath('src/index.html'),
                 title: webpackConfig.pageInfo.title,
                 chunksSortMode: 'dependency',
-                inject: 'head',
+                //inject: 'head',
+                inject: false,
                 metadata: {
                     baseURL: webpackConfig.pageInfo.baseURL,
+                    faviconPath: webpackConfig.pageInfo.faviconPath,
                     isDevServer: helpers.isWebpackDevServer(),
                     HMR: webpackConfig.HMR
                 }

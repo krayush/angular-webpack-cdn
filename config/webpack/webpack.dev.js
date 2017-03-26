@@ -24,6 +24,7 @@ module.exports = function () {
         output: {
             filename: '[name].bundle.js',
             path: helpers.getAbsolutePath('dist'),
+            //publicPath: helpers.getAbsolutePath('dist'),
             sourceMapFilename: '[file].map',
             chunkFilename: "[id].chunk.js"
         },

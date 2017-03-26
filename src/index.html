@@ -16,52 +16,49 @@
         Loading...
     </app>
     <script>
-//        (function(window) {
-//            var environmentInfo = localStorage.getItem("bootConfig") || "";
-//            if(environmentInfo) {
-//                environmentInfo = JSON.parse(environmentInfo);
-//            }
-//            window.remoteCDNUrl = environmentInfo.remoteCDNUrl || '/';
-//            window.remoteServerUrl = environmentInfo.remoteServerUrl || '/';
-//
-//            var appendStyleToHead = function(filePath) {
-//                var head = document.getElementsByTagName('head')[0];
-//                var sheet = document.createElement('link');
-//                sheet.type = "text/css";
-//                sheet.rel = "stylesheet";
-//                sheet.media = 'all';
-//                sheet.href = filePath;
-//                head.appendChild(sheet);
-//            }
-//            window.onload = function() {
-//                var xhttp = new XMLHttpRequest();
-//                xhttp.onreadystatechange = function() {
-//                    if (this.readyState == 4) {
-//                        if(this.status == 200) {
-//                            var imports = JSON.parse(xhttp.responseText);
-//                            imports = JSON.parse(imports);
-//                            var jsFiles = imports.jsAssets;
-//                            jsFiles = jsFiles.map(function(item) {
-//                                return window.remoteCDNUrl + item;
-//                            });
-//                            head.load(jsFiles);
-//                            imports.cssAssets.map(function (file) {
-//                                appendStyleToHead(window.remoteCDNUrl + file);
-//                            });
-//                        } else {
-//                            // call app init failed
-//                        }
-//                    }
-//                };
-//                xhttp.open("GET", "/src/externalAssets.json", true);
-//                xhttp.send();
-//            };
-//        })(window);
+        (function(window) {
+            var environmentInfo = localStorage.getItem("bootConfig") || "";
+            if(environmentInfo) {
+                environmentInfo = JSON.parse(environmentInfo);
+            }
+            window.remoteCDNUrl = environmentInfo.remoteCDNUrl || '/';
+            window.remoteServerUrl = environmentInfo.remoteServerUrl || '/';
+
+            var appendStyleToHead = function(filePath) {
+                var head = document.getElementsByTagName('head')[0];
+                var sheet = document.createElement('link');
+                sheet.type = "text/css";
+                sheet.rel = "stylesheet";
+                sheet.media = 'all';
+                sheet.href = filePath;
+                head.appendChild(sheet);
+            }
+            window.onload = function() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        if(this.status == 200) {
+                            var imports = JSON.parse(xhttp.responseText);
+                            imports = JSON.parse(imports);
+                            var jsFiles = imports.jsAssets;
+                            jsFiles = jsFiles.map(function(item) {
+                                return window.remoteCDNUrl + item;
+                            });
+                            head.load(jsFiles);
+                            imports.cssAssets.map(function (file) {
+                                appendStyleToHead(window.remoteCDNUrl + file);
+                            });
+                        } else {
+                            // call app init failed
+                        }
+                    }
+                };
+                xhttp.open("GET", "/src/externalAssets.json", true);
+                xhttp.send();
+            };
+        })(window);
     </script>
     <!-- Google Analytics: change UA-71073175-1 to be your site's ID -->
-    <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
-    <!-- Webpack Dev Server reload -->
-    <script src="/webpack-dev-server.js"></script>
-    <% } %>
+
 </body>
 </html>

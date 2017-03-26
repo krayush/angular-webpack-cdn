@@ -19,9 +19,7 @@ module.exports = function () {
                 aggregateTimeout: 300,
                     poll: 1000
             },
-            historyApiFallback: {
-                index: 'src/index.html'
-            }
+            historyApiFallback: true
         },
         externalAssetsConfig = {
             "jsAssets": [
@@ -36,7 +34,9 @@ module.exports = function () {
             ]
         },
         pageInfo = {
-            title: "title"
+            title: "title",
+            faviconPath: "/assets/images/favicon/favicon.ico",
+            baseURL: "/"
         };
     var webpackConfig = {
         entryPoints: entryPoints,
