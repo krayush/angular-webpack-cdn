@@ -11,23 +11,21 @@ import {
     createInputTransfer
 } from '@angularclass/hmr';
 import {
-    RouterModule,
-    PreloadAllModules
+    RouterModule
 } from '@angular/router';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
 import { ENV_PROVIDERS } from './environment';
-import { ROUTES } from './app.routes';
+import { RoutesInfo } from './resources/routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
-import { HomeComponent } from './home';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
+import { HomeComponent } from './components/home';
+import { AboutComponent } from './components/about';
+import { NoContentComponent } from './components/no-content';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -41,25 +39,22 @@ type StoreType = {
     disposeOldHosts: () => void
 };
 
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
         AboutComponent,
         HomeComponent,
-        NoContentComponent,
-        XLargeDirective
+        NoContentComponent
     ],
     imports: [ // import Angular's modules
         BrowserModule,
         FormsModule,
         HttpModule,
-        RouterModule.forRoot(ROUTES)
+        RouterModule.forRoot(new RoutesInfo().getRoutingConfig())
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
+        RoutesInfo,
         ENV_PROVIDERS,
         APP_PROVIDERS
     ]

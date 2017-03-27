@@ -5,15 +5,11 @@ import {
 } from '@angular/core';
 import { AppState } from './app.service';
 
-/*
- * App Component
- * Top Level Component
- */
 @Component({
     selector: 'app',
     encapsulation: ViewEncapsulation.None,
     // styleUrls: [
-    //     './app.component.css'
+    //     './app.component.scss'
     // ],
     template: `
         <nav>
@@ -48,6 +44,7 @@ import { AppState } from './app.service';
         </footer>
     `
 })
+
 export class AppComponent implements OnInit {
     public name = '';
     public url = '';
