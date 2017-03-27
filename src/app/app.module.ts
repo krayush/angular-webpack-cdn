@@ -16,7 +16,7 @@ import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './components/home';
 import { AboutComponent } from './components/about';
 import { NoContentComponent } from './components/no-content';
-
+import { SidebarComponent } from './components/sidebar';
 // Application wide providers
 const APP_PROVIDERS = [
     ...APP_RESOLVER_PROVIDERS,
@@ -35,7 +35,8 @@ type StoreType = {
         AppComponent,
         AboutComponent,
         HomeComponent,
-        NoContentComponent
+        NoContentComponent,
+        SidebarComponent
     ],
     imports: [ // import Angular's modules
         BrowserModule,
