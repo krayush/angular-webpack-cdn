@@ -1,31 +1,33 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-/*
- * We're loading this component asynchronously
- * We are using some magic with es6-promise-loader that will wrap the module with a Promise
- * see https://github.com/gdi2290/es6-promise-loader for more info
- */
-
-console.log('`Barrel` component loaded asynchronously');
+import { Component,OnInit } from '@angular/core';
+import { DataService } from '../../services/data.service';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'barrel',
-  template: `
-    <h1>Hello from Barrel</h1>
-    <span>
-      <a [routerLink]=" ['./child-barrel'] ">
-        Child Barrel
-      </a>
-    </span>
-    <router-outlet></router-outlet>
-  `,
+    selector: 'barrel',
+    template: `
+        <h1 (click)="fetchData()">Hello from Barrel</h1>
+        <span>
+            <a [routerLink]=" ['./child-barrel'] ">
+                Child Barrel
+            </a>
+        </span>
+        <router-outlet></router-outlet>
+    `
 })
 export class BarrelComponent implements OnInit {
-
-  public ngOnInit() {
-    console.log('hello `Barrel` component');
-  }
-
+    private netTalker;
+    constructor(private talker: DataService) {
+        this.netTalker = talker;
+    }
+    public ngOnInit() {
+        console.log('hello `Barrel` component');
+    }
+    public fetchData() {
+        console.error("Request sending");
+        this.netTalker.post("samplePost", [], {})
+            .subscribe((data)=>{
+                console.error(data.value);
+            });
+    }
 }

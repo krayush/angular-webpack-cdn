@@ -1,24 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {
-    NgModule,
-    ApplicationRef
-} from '@angular/core';
-import {
-    removeNgStyles,
-    createNewHosts,
-    createInputTransfer
-} from '@angularclass/hmr';
-import {
-    RouterModule
-} from '@angular/router';
+import { DataService } from './services/data.service';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { RouterModule } from '@angular/router';
 
-/*
- * Platform and Environment providers/directives/pipes
- */
 import { ENV_PROVIDERS } from './environment';
 import { RoutesInfo } from './resources/routes';
+
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
@@ -55,6 +45,7 @@ type StoreType = {
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         RoutesInfo,
+        DataService,
         ENV_PROVIDERS,
         APP_PROVIDERS
     ]
