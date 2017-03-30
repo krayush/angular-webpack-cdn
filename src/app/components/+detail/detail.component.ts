@@ -1,31 +1,21 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-/*
- * We're loading this component asynchronously
- * We are using some magic with es6-promise-loader that will wrap the module with a Promise
- * see https://github.com/gdi2290/es6-promise-loader for more info
- */
-
-console.log('`Detail` component loaded asynchronously');
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'detail',
-  template: `
-    <h1>Hello from Detail</h1>
-    <span>
-      <a [routerLink]=" ['./child-detail'] ">
-        Child Detail
-      </a>
-    </span>
-    <router-outlet></router-outlet>
-  `,
+    selector: 'detail',
+    templateUrl: 'detail.component.html',
 })
+
 export class DetailComponent implements OnInit {
-
-  public ngOnInit() {
-    console.log('hello `Detail` component');
-  }
-
+    private options;
+    constructor() {
+        this.options = {
+            title : { text : 'simple chart' },
+            series: [{
+                data: [29.9, 71.5, 106.4, 129.2],
+            }]
+        };
+    }
+    public ngOnInit() {
+        console.log('hello `Detail` component');
+    }
 }

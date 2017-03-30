@@ -1,10 +1,19 @@
 @import "../assets/styles/variables";
-.app-container{
+html, body {
+    height: 100%;
+}
+.app-header {
+    transition: all 0.338s ease-in-out;
+    top: 0;
+    position: relative;
+    z-index: 1;
+}
+.app-main-container {
     display:block;
     width:100%;
     height:100%;
 }
-.app-sidebar{
+.app-sidebar {
     width: 200px;
     background: #2A3F54;
     height: calc(100% - #{$header-height});
@@ -17,14 +26,14 @@
         width:54px;
     }
 }
-.app-container{
-    width: calc(100% - 200px);
+.app-container {
+    width: calc(100% - 54px);
     float: right;
     transition:width $global-transition-val;
     height: calc(100% - 50px);
 }
-.app-breadcrumb{
-    width: calc(100% - 200px);
+.app-breadcrumb {
+    width: calc(100% - 54px);
     float: left;
     border-bottom: 1px solid #eaeaea;
     border-left: 1px solid #eaeaea;
