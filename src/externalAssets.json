@@ -1,1 +1,1 @@
-"{\"jsAssets\":[\"polyfills.dll.js\",\"vendor.dll.js\",\"polyfills.bundle.js\",\"vendor.bundle.js\",\"main.bundle.js\"],\"cssAssets\":[\"app.style.css\"]}"
+"{\"jsAssets\":[\"dist/polyfills.dll.js\",\"dist/vendor.dll.js\",\"dist/polyfills.bundle.js\",\"dist/vendor.bundle.js\",\"dist/main.bundle.js\"],\"cssAssets\":[\"dist/app.style.css\",\"dist/vendor.style.css\"]}"

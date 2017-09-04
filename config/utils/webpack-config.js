@@ -30,7 +30,8 @@ module.exports = function () {
                 "dist/main.bundle.{hash}js"
             ],
             "cssAssets": [
-                "dist/app.style.{hash}css"
+                "dist/app.style.{hash}css",
+                "dist/vendor.style.{hash}css"
             ]
         },
         pageInfo = {

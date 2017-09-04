@@ -15,10 +15,6 @@ module.exports = function () {
         tsFiles = [
             app + '**/!(*.spec)+(.ts)'
         ],
-        externalFonts = {
-            'font-awesome': 'node_modules/font-awesome/fonts/*.*',
-            'bootstrap': 'node_modules/bootstrap-sass/assets/fonts/bootstrap/*.*'
-        },
         dllPath = root + 'dll/',
         build = {
             path: 'dist/',
@@ -30,12 +26,11 @@ module.exports = function () {
             "/assets/images/app-images",
             "/assets/images/favicon"
         ];
-    var gulpConfig = {
+    var config = {
         root: root,
         config: config,
         src: src,
         app: app,
-        externalFonts: externalFonts,
         assets: assets,
         index: index,
         build: build,
@@ -44,5 +39,5 @@ module.exports = function () {
         tsFiles: tsFiles,
         requiredAssets: requiredAssets
     };
-    return gulpConfig;
+    return config;
 };

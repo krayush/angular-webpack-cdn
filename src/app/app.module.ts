@@ -19,7 +19,6 @@ import { NoContentComponent } from './components/no-content';
 import { SidebarComponent } from './components/sidebar';
 import { HeaderComponent } from './components/header';
 
-import { DataTableModule } from 'angular2-datatable';
 import { ChartModule } from 'angular2-highcharts';
 // Application wide providers
 const APP_PROVIDERS = [
@@ -44,7 +43,6 @@ type StoreType = {
         HeaderComponent
     ],
     imports: [ // import Angular's modules
-        DataTableModule,
         ChartModule.forRoot(require('highcharts')),
         BrowserModule,
         FormsModule,

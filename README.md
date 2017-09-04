@@ -95,13 +95,6 @@ To enable debug mode: add this json config in localStorage.
 }
 ```
 
-### Adding external fonts
-For adding external fonts, add them to externalFonts array under
-```directory
- /
-   |- config/utils/path-config.js
-```
-
 ### Generating documentation
 ```bash
  npm run doc

@@ -1,22 +1,30 @@
-var webpack = require('webpack');
-var helpers = require('../utils/helpers');
-var webpackConfig = require('../utils/webpack-config')();
-var pathConfig = require('../utils/path-config')();
-
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-var ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
-var DefinePlugin = require('webpack/lib/DefinePlugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var AssetsPlugin = require('assets-webpack-plugin');
-var CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-var ngcWebpack = require('ngc-webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
+const helpers = require('../utils/helpers');
+const webpackConfig = require('../utils/webpack-config')();
+const pathConfig = require('../utils/path-config')();
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const AssetsPlugin = require('assets-webpack-plugin');
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const ngcWebpack = require('ngc-webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // Note: Loaders load from bottom to top and right to left
 module.exports = function () {
+    var isWebpackDevServer = helpers.isWebpackDevServer();
     var requiredAssets = [];
+    var devPlugins = [];
+    if(isWebpackDevServer) {
+        devPlugins.push(new BundleAnalyzerPlugin({
+            openAnalyzer: false
+        }));
+    }
     pathConfig.requiredAssets.map(function(item) {
         requiredAssets.push({
             from: helpers.getAbsolutePath('src' + item),
@@ -81,6 +89,13 @@ module.exports = function () {
                     use: ["css-loader", "sass-loader"]
                 }),
                 include: [helpers.getAbsolutePath('src/assets/styles')]
+            }, {
+                test: /webfont\.config\.js/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    'webfonts-loader'
+                ]
             }]
         },
         plugins: [
@@ -125,7 +140,7 @@ module.exports = function () {
                 metadata: {
                     baseURL: webpackConfig.pageInfo.baseURL,
                     faviconPath: webpackConfig.pageInfo.faviconPath,
-                    isDevServer: helpers.isWebpackDevServer(),
+                    isDevServer: isWebpackDevServer,
                     HMR: webpackConfig.HMR
                 }
             }),
@@ -133,7 +148,15 @@ module.exports = function () {
             new ngcWebpack.NgcWebpackPlugin({
                 disabled: !webpackConfig.AOT,
                 tsConfig: helpers.getAbsolutePath('tsconfig.webpack.json')
-            })
+            }),
+            new CleanWebpackPlugin([
+                pathConfig.build.path,
+                pathConfig.dllPath,
+                pathConfig.app + '**/*.css',
+                pathConfig.assetsPath.styles + '**/*.css',
+                pathConfig.assetsPath.images + 'sprite-dist/'
+            ]),
+            ...devPlugins
         ],
         node: {
             global: true,
